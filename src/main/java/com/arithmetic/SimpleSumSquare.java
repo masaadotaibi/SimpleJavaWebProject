@@ -3,7 +3,6 @@ package com.arithmetic;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,18 +10,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class SimpleAddition
+ * Servlet implementation class SquareServlet
  */
-@WebServlet("/SimpleAddition")
-public class SimpleAddition extends HttpServlet {
+@WebServlet("/SquareServlet")
+public class SimpleSumSquare extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SimpleAddition() {
+    public SimpleSumSquare() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -33,22 +31,14 @@ public class SimpleAddition extends HttpServlet {
 		int num1 = (int) request.getAttribute("num1");
 		int num2 = (int) request.getAttribute("num2");
 		
-		int sum = num1 + num2;
+		int sum = (int) request.getAttribute("sum");
 		
-		request.setAttribute("sum", sum);
+		int sumSqaured = sum * sum;
 		
-		String operation = request.getParameter("operations");
+		PrintWriter out = response.getWriter();
 		
-		System.out.println("Operation in add is " + operation);
-		
-		if(operation.equals("addition")) {
-			PrintWriter out = response.getWriter();
-			out.println(num1 + " + " + num2 + " = " + sum);
-		}
-		else {
-			RequestDispatcher rd = request.getRequestDispatcher("square");
-			rd.forward(request, response);
-		}
+		out.println(num1 + " + " + num2 + " = " + sum);
+		out.println("And the sum squared " + sum + "² = " +  sumSqaured);
 		
 	}
 
@@ -56,9 +46,8 @@ public class SimpleAddition extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		// TODO Auto-generated method stub
 		doGet(request, response);
-		
 	}
 
 }

@@ -1,7 +1,6 @@
 package com.arithmetic;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,18 +10,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class SimpleAddition
+ * Servlet implementation class SimpleArithmetic
  */
-@WebServlet("/SimpleAddition")
-public class SimpleAddition extends HttpServlet {
+@WebServlet("/SimpleArithmetic")
+public class SimpleArithmetic extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SimpleAddition() {
+    public SimpleArithmetic() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -30,25 +28,37 @@ public class SimpleAddition extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int num1 = (int) request.getAttribute("num1");
-		int num2 = (int) request.getAttribute("num2");
-		
-		int sum = num1 + num2;
-		
-		request.setAttribute("sum", sum);
+		int num1 = Integer.parseInt(request.getParameter("num1"));
+		int num2 = Integer.parseInt(request.getParameter("num2"));
 		
 		String operation = request.getParameter("operations");
 		
-		System.out.println("Operation in add is " + operation);
+		System.out.println("The operations is: " + operation);
 		
-		if(operation.equals("addition")) {
-			PrintWriter out = response.getWriter();
-			out.println(num1 + " + " + num2 + " = " + sum);
+		request.setAttribute("num1", num1);
+		request.setAttribute("num2", num2);
+		
+		RequestDispatcher rd = null;
+		
+		switch (operation) {
+			case "addition":
+				rd = request.getRequestDispatcher("add");
+				break;
+			case "subtraction":
+				rd = request.getRequestDispatcher("subtraction");
+				break;
+			case "multiplication":
+				rd = request.getRequestDispatcher("multiplication");
+				break;
+			case "division":
+				rd = request.getRequestDispatcher("division");
+				break;
+			case "square":
+				rd = request.getRequestDispatcher("add");
+				break;
 		}
-		else {
-			RequestDispatcher rd = request.getRequestDispatcher("square");
-			rd.forward(request, response);
-		}
+		
+		rd.forward(request, response);
 		
 	}
 
@@ -56,9 +66,8 @@ public class SimpleAddition extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		// TODO Auto-generated method stub
 		doGet(request, response);
-		
 	}
 
 }
