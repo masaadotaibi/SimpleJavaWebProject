@@ -30,21 +30,26 @@ public class SimpleDivision extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		double num1 = (int) request.getAttribute("num1");
-		double num2 = (int) request.getAttribute("num2");
+		double num1 = Integer.parseInt(request.getParameter("num1"));
+		double num2 = Integer.parseInt(request.getParameter("num2"));
 		
 		PrintWriter out = response.getWriter();
 		
 		if(num2 == 0) {
+			
 			RequestDispatcher rd = request.getRequestDispatcher("arithmetic-calc.html");
 			
 			try {
-				Thread.sleep(2000);
-				rd.forward(request, response);
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
+			rd.include(request, response);
+			out.println("<span style='color:red'> Division by 0 !!"
+					+ "<br>You wanted to calculate " + (int)num1 + "/" + (int)num2
+					+ "<br>Actually it is too hard for us to caclulate a divison by zero :) </span>");
 		}
 		else {
 			double divResult = num1 / num2;

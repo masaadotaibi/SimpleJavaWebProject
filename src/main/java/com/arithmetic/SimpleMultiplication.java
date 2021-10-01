@@ -29,8 +29,8 @@ public class SimpleMultiplication extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int num1 = (int) request.getAttribute("num1");
-		int num2 = (int) request.getAttribute("num2");
+		int num1 = Integer.parseInt(request.getParameter("num1"));
+		int num2 = Integer.parseInt(request.getParameter("num2"));
 		
 		int dot = num1 * num2;
 		

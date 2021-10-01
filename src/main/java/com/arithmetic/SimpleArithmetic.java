@@ -28,15 +28,9 @@ public class SimpleArithmetic extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int num1 = Integer.parseInt(request.getParameter("num1"));
-		int num2 = Integer.parseInt(request.getParameter("num2"));
-		
 		String operation = request.getParameter("operations");
 		
 		System.out.println("The operations is: " + operation);
-		
-		request.setAttribute("num1", num1);
-		request.setAttribute("num2", num2);
 		
 		RequestDispatcher rd = null;
 		

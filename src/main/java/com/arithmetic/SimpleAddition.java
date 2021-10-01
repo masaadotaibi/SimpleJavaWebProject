@@ -30,12 +30,10 @@ public class SimpleAddition extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int num1 = (int) request.getAttribute("num1");
-		int num2 = (int) request.getAttribute("num2");
+		int num1 = Integer.parseInt(request.getParameter("num1"));
+		int num2 = Integer.parseInt(request.getParameter("num2"));
 		
 		int sum = num1 + num2;
-		
-		request.setAttribute("sum", sum);
 		
 		String operation = request.getParameter("operations");
 		
@@ -46,8 +44,7 @@ public class SimpleAddition extends HttpServlet {
 			out.println(num1 + " + " + num2 + " = " + sum);
 		}
 		else {
-			RequestDispatcher rd = request.getRequestDispatcher("square");
-			rd.forward(request, response);
+			response.sendRedirect("square?sum="+sum + "&num1="+num1 + "&num2="+num2);
 		}
 		
 	}
