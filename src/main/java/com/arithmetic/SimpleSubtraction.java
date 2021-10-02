@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class SimpleSubtraction
  */
-@WebServlet("/SimpleSubtraction")
+@WebServlet("/subtraction")
 public class SimpleSubtraction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

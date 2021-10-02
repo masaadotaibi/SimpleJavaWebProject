@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class SimpleArithmetic
  */
-@WebServlet("/SimpleArithmetic")
+@WebServlet("/arithmetic")
 public class SimpleArithmetic extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
