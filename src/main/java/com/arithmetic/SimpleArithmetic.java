@@ -5,9 +5,11 @@ import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class SimpleArithmetic
@@ -32,27 +34,31 @@ public class SimpleArithmetic extends HttpServlet {
 		
 		System.out.println("The operations is: " + operation);
 		
-		RequestDispatcher rd = null;
+		HttpSession session = request.getSession();
+		
+		session.setAttribute("num1", Integer.parseInt(request.getParameter("num1")));
+		
+		session.setAttribute("num2", Integer.parseInt(request.getParameter("num2")));
+		
+		session.setAttribute("operation", operation);
 		
 		switch (operation) {
 			case "addition":
-				rd = request.getRequestDispatcher("add");
+				response.sendRedirect("add.jsp");
 				break;
 			case "subtraction":
-				rd = request.getRequestDispatcher("subtraction");
+				response.sendRedirect("subtract.jsp");
 				break;
 			case "multiplication":
-				rd = request.getRequestDispatcher("multiplication");
+				response.sendRedirect("multiplication.jsp");
 				break;
 			case "division":
-				rd = request.getRequestDispatcher("division");
+				response.sendRedirect("division.jsp");
 				break;
 			case "square":
-				rd = request.getRequestDispatcher("add");
+				response.sendRedirect("add.jsp");
 				break;
 		}
-		
-		rd.forward(request, response);
 		
 	}
 
@@ -60,7 +66,6 @@ public class SimpleArithmetic extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
